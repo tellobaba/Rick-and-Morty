@@ -11,7 +11,7 @@ import Foundation
 enum RMGenderStatus: String, Codable{
     case Male = "Male"
     case Female = "Female"
-    case `Unknown` = "Unknown"
+    case `Unknown` = "unknown"
     case Genderless = "Genderless"
     
 }
