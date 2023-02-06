@@ -15,7 +15,7 @@ final class CharacterListViewViewModel: NSObject{
             in
             switch results {
             case .success (let model):
-                print("Total: "+String(model.info.count))
+                print("Example Image URL: "+String(model.results.first?.image ?? "No image"))
             case .failure(let error):
                 print(String(describing: error))
             }
@@ -28,8 +28,16 @@ extension CharacterListViewViewModel: UICollectionViewDataSource, UICollectionVi
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "cell", for: indexPath )
-        cell.backgroundColor = .white
+       guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: RMCharacterCollectionViewCell.cellIdentifier, for: indexPath )
+                as? RMCharacterCollectionViewCell else{
+           fatalError("Unsupported Cell")
+       }
+        let viewModel = RMCharacterCollectionViewCellViewModel(
+            characterName: "Tello",
+            characterStatus: .Alive,
+            characterImageURL: URL(string: "https://rickandmortyapi.com/api/character/avatar/1.jpeg"))
+            
+        cell.configure(with: viewModel)
         return cell
     }
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
