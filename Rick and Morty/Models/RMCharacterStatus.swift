@@ -10,4 +10,15 @@ enum RMCharacterStatus: String, Codable{
     case Alive = "Alive"
     case Dead = "Dead"
     case `Unknown` = "unknown"
+    
+    var text: String {
+        switch self {
+        case .Alive:
+            return rawValue
+        case .Dead:
+            return rawValue
+        case .Unknown:
+            return "Unknown"
+        }
+    }
 }

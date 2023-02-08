@@ -23,11 +23,11 @@ final class RMCharacterCollectionViewCellViewModel{
     }
     
     public var characterStatusText: String{
-        return characterStatus.rawValue
+        return "Status: \(characterStatus.text )"
     }
     
     public func fetchImage(completion: @escaping (Result<Data, Error>)->Void){
-        //Todo: abstract to image manager 
+        //Todo: abstract to image manager
         guard let url = characterImageURL else {
             completion(.failure(URLError(.badURL)))
             return
@@ -41,7 +41,7 @@ final class RMCharacterCollectionViewCellViewModel{
             }
             completion(.success(data))
         }
-
-    task.resume()
-}
+        
+        task.resume()
+    }
 }
