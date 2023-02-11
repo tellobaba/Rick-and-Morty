@@ -88,12 +88,11 @@ final class CharacterListViewViewModel: NSObject{
                 let indexPathToAdd: [IndexPath] = Array(startingIndex..<(startingIndex+newCount)).compactMap({
                     return IndexPath(row: $0, section: 0)
                 })
-                
                 strongSelf.characters.append(contentsOf: moreResults)
                 DispatchQueue.main.async {
                     self?.delegate?.didLoadMoreCharacters(
                         with: indexPathToAdd)
-                    self?.isLoadingMoreCharacters = false
+                    strongSelf.isLoadingMoreCharacters = false
                 }
             case .failure(let failure):
                 print(String(describing: failure))
